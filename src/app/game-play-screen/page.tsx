@@ -230,19 +230,24 @@ function GameFlow() {
         setRandomCard(null);
     }
 
+    if (!players || players.length === 0) {
+
+        return (<div className="flex justify-center items-center w-full h-full text-center ">
+            <button onClick={handleStartGame}
+                    className="text-white text-2xl hover:text-gray-500 border-1 border-indigo-50 rounded-2xl p-3">Start
+                New Game
+            </button>
+        </div>)
+    }
+
     return (
-        <div className=" " >
-            <h2>The Banker 💰</h2>
-            <div>
-                <button onClick={handleStartGame}>Start New Game</button>
-                <button onClick={shufflePlayersCards} disabled={players.length === 0}>
-                    Shuffle Cards
-                </button>
-                <h3>Bank: {bankAmount} 💰</h3>
+        <div className=" w-full h-full text-center text-yellow-200">
+            <div className="flex justify-center items-center w-full text-center p-4 text-4xl">
+                <h2>The Banker 💰</h2>
             </div>
 
-            <div style={{display: players.length === 0 ? "none" : "flex"}}>
-                <h3>Random Card: <motion.div drag animate={{
+            <div className="flex justify-between items-center w-full px-100 p-4">
+                <motion.div drag animate={{
                     y: randomCardAnimation ? 120 : 0,
                     x: randomCardAnimation ? 400 : 0,
                     rotate: randomCardAnimation ? 360 : 0,
@@ -251,61 +256,60 @@ function GameFlow() {
 
                     <DeckContainer hand={randomCard || ""}/>
 
-                </motion.div></h3>
+                </motion.div>
+                <h3>🎯 Turn: {players[currentPlayerIndex]?.name || "None"}</h3>
+                <h3>Bank: {bankAmount} 💰</h3>
+            </div>
 
+            <div className="text-center w-full p-4 flex justify-center items-center">
                 <h3>Status: {wonLossStatus}</h3>
             </div>
 
-            {
-                players.length === 0 ? (
-                    <div>
-                        <h1>
-                            please start the game
-                        </h1>
-                    </div>
-                ) : (
-                    <div className="grid grid-cols-4">
-                        {players.map((player, index) => (
-                            <div
-                                key={index}
-                                id="playerDetails"
-                                className={index === currentPlayerIndex ? "activePlayer" : ""}
-                            >
-                                <h3>👤 {player.name}</h3>
-                                <div className={index === currentPlayerIndex ? "" : "MakeTheCardBlurry"}>
-                                    <DeckContainer hand={player.hand[0] ?? ""}></DeckContainer></div>
-                                <p className={index === currentPlayerIndex ? "" : "MakeTheCardBlurry"}>
-                                    <DeckContainer hand={player.hand[1] ?? ""}></DeckContainer></p>
-                                <p> Coins:💸 {player.bet}</p>
-                            </div>
-                        ))}
+            <div className=" flex items-center justify-between w-full px-70 pt-5 pr-0">
+                {players.map((player, index) => (
+                    <div
+                        key={index}
+                        id="playerDetails"
+                        className={index === currentPlayerIndex ? "activePlayer" : ""}
+                    >
 
-                        <div>
-                            <label>
-                                Enter Bet Amount:
-                                <input
-                                    type="number"
-                                    min="1"
-                                    max={Math.min(players[currentPlayerIndex]?.bet || 1, bankAmount)}
-                                    value={currentBet}
-                                    onChange={(e) => setCurrentBet(Number(e.target.value))}
-                                    disabled={players.length === 0}
-                                />
-                            </label>
-                            <button className="bg-white p-2 rounded-xl" onClick={bet} disabled={players.length === 0 || currentBet <= 0}>
-                                Bet
-                            </button>
+                        <div className=" relative">
+                            <p className=""><DeckContainer hand={player.hand[0] ?? ""}></DeckContainer></p>
+                            <p className="absolute top-2.5 left-3.5 rotate-25 "><DeckContainer
+                                hand={player.hand[1] ?? ""}></DeckContainer></p>
                         </div>
-
-                        <div>
-                            <h3>🎯 Turn: {players[currentPlayerIndex]?.name || "None"}</h3>
-                            <button onClick={passTurn} disabled={players.length === 0} >
-                                Pass
-                            </button>
-                        </div>
+                        <h3 className="text-center pt-4">👤 {player.name}</h3>
+                        <p className="text-center"> Coins: {player.bet}</p>
                     </div>
-                )
-            }
+                ))}
+
+                <div>
+                </div>
+            </div>
+            <div className="flex items-center justify-between w-full px-50 mt-35 p-4"   >
+                <button onClick={handleStartGame} className="border-1 p-3 rounded-2xl hover:text-white">Start New Game</button>
+                <button onClick={shufflePlayersCards} disabled={players.length === 0} className="border-1 p-3 rounded-2xl hover:text-white">
+                    Shuffle Cards
+                </button>
+                <label className="border-1 p-3 rounded-2xl hover:text-white">
+                    Enter Bet Amount:
+                    <input
+                        type="number"
+                        min="1"
+                        max={Math.min(players[currentPlayerIndex]?.bet || 1, bankAmount)}
+                        value={currentBet}
+                        onChange={(e) => setCurrentBet(Number(e.target.value))}
+                        disabled={players.length === 0}
+                        className="text-center"
+                    />
+                </label>
+                <button onClick={bet} className="border-1 p-5 rounded-full hover:text-white bg-red-500">
+                    Bet
+                </button>
+                <button onClick={passTurn} className="border-1 p-5 rounded-full hover:text-white bg-amber-200 text-red-500">
+                    Pass
+                </button>
+            </div>
         </div>
 
     );
