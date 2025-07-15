@@ -234,7 +234,7 @@ function GameFlow() {
 
         return (<div className="flex justify-center items-center w-full h-full text-center ">
             <button onClick={handleStartGame}
-                    className="text-white text-2xl hover:text-gray-500 border-1 border-indigo-50 rounded-2xl p-3">Start
+                    className="text-white text-2xl hover:text-yellow-200 border-1 rounded-2xl p-3">Start
                 New Game
             </button>
         </div>)

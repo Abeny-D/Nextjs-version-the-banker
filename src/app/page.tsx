@@ -14,13 +14,13 @@ export default function Home() {
 
     return (
 
-        <div className="w-full">
-            <div className='flex justify-between w-full  fixed top-0 p-5 text-white'>
-                <MenuIcon className="" to="/"/>
-                <VolumeUpIcon className=""/>
+        <div className="w-full h-full">
+            <div className='flex justify-between w-full fixed top-0 p-5 text-white'>
+                <MenuIcon className="hover:text-yellow-200" to="/"/>
+                <VolumeUpIcon className="hover:text-yellow-200"/>
             </div>
-            <div className="flex justify-center text-3xl text-gray-800 ">
-            <button onClick={routerAdd} className="p-2 bg-white  rounded-2xl hover:text-green-500">Let&#39;s get started</button>
+            <div className=" flex items-center justify-center w-full h-screen text-white">
+            <button onClick={routerAdd} className="border-1 p-3 rounded-2xl hover:text-yellow-200  ">Let&#39;s get started</button>
             </div>
 
 
