@@ -234,8 +234,7 @@ function GameFlow() {
 
         return (<div className="flex justify-center items-center w-full h-full text-center ">
             <button onClick={handleStartGame}
-                    className="text-white text-2xl hover:text-yellow-200 border-1 rounded-2xl p-3">Start
-                New Game
+                    className="border-1 p-3 rounded-2xl hover:text-yellow-200 text-white">Add players
             </button>
         </div>)
     }
@@ -270,7 +269,7 @@ function GameFlow() {
                     <div
                         key={index}
                         id="playerDetails"
-                        className={index === currentPlayerIndex ? "activePlayer" : ""}
+                        className={index === currentPlayerIndex ? "border-2 rounded-2xl p-4 border-green-400" : " "}
                     >
 
                         <div className=" relative">
@@ -286,7 +285,7 @@ function GameFlow() {
                 <div>
                 </div>
             </div>
-            <div className="flex items-center justify-between w-full px-50 mt-35 p-4"   >
+            <div className="flex items-center justify-between w-full px-50 mt-28 p-4"   >
                 <button onClick={handleStartGame} className="border-1 p-3 rounded-2xl hover:text-white">Start New Game</button>
                 <button onClick={shufflePlayersCards} disabled={players.length === 0} className="border-1 p-3 rounded-2xl hover:text-white">
                     Shuffle Cards

@@ -20,7 +20,7 @@ export default function Home() {
                 <VolumeUpIcon className="hover:text-yellow-200"/>
             </div>
             <div className=" flex items-center justify-center w-full h-screen text-white">
-            <button onClick={routerAdd} className="border-1 p-3 rounded-2xl hover:text-yellow-200  ">Let&#39;s get started</button>
+            <button onClick={routerAdd} className="border-1 p-3 rounded-2xl hover:text-yellow-200">Let&#39;s get started</button>
             </div>
 
 
