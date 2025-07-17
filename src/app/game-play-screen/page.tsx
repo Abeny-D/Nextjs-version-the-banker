@@ -264,7 +264,7 @@ function GameFlow() {
                 <h3>Status: {wonLossStatus}</h3>
             </div>
 
-            <div className=" flex items-center justify-between w-full px-70 pt-5 pr-0">
+            <div className=" flex items-center justify-between w-full px-70 pt-5 pr-0 ">
                 {players.map((player, index) => (
                     <div
                         key={index}
