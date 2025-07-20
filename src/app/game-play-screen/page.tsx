@@ -26,14 +26,14 @@ function GameFlow() {
     const [randomCardAnimation, setRandomCardAnimation] = useState(false);
 
 
-    function createPlayers(players: string[]) {
+    function createPlayers(players: string[], bet: number[]) {
         const deck = shuffleDeck(createDeck());
         const newPlayers = [];
 
         for (let i = 0; i < 4; i++) {
             const name = players[i];
             const hand = [deck.pop(), deck.pop()];
-            const coins = 500;
+            const coins = bet[i];
             newPlayers.push({id: i, name: name, hand: hand, bet: coins});
         }
 
@@ -46,11 +46,22 @@ function GameFlow() {
     function handleStartGame() {
 
         const playerNameInput: string[] = [];
+        const playerBetInput: number[]  = [];
 
-        while (playerNameInput.length < 4) {
-            const newPlayerName = prompt(`Please enter player ${playerNameInput.length + 1}`)
+        while (playerNameInput.length < 4 && playerBetInput.length < 4) {
+            const newPlayerName = prompt(`Please enter player ${playerNameInput.length + 1} name`)
 
-            if (newPlayerName === null) {
+            const input = prompt(`Please enter player ${playerBetInput.length + 1} bet amount`);
+            const newPlayerBet: number | null = input !== null ? Number(input) : null;
+
+
+            if (isNaN(Number(newPlayerBet))) {
+                alert("Input should be a number");
+                continue;
+
+            }
+
+            if (newPlayerName === null || newPlayerBet === null) {
                 break;
             }
 
@@ -59,13 +70,14 @@ function GameFlow() {
             }
 
             playerNameInput.push(newPlayerName);
+            playerBetInput.push(newPlayerBet);
         }
 
-        if (playerNameInput.length < 4) {
+        if (playerNameInput.length < 4 || playerBetInput.length < 4) {
             return;
         }
 
-        createPlayers(playerNameInput);
+        createPlayers(playerNameInput, playerBetInput);
         setCurrentPlayerIndex(0);
         setWonLossStatus("Game started!");
         setRandomCard(null);
@@ -273,9 +285,9 @@ function GameFlow() {
                     >
 
                         <div className=" relative">
-                            <p className=""><DeckContainer hand={player.hand[0] ?? ""}></DeckContainer></p>
-                            <p className="absolute top-2.5 left-3.5 rotate-25 "><DeckContainer
-                                hand={player.hand[1] ?? ""}></DeckContainer></p>
+                            <div className=""><DeckContainer hand={player.hand[0] ?? ""}></DeckContainer></div>
+                            <div className="absolute top-2.5 left-3.5 rotate-25 "><DeckContainer
+                                hand={player.hand[1] ?? ""}></DeckContainer></div>
                         </div>
                         <h3 className="text-center pt-4">👤 {player.name}</h3>
                         <p className="text-center"> Coins: {player.bet}</p>

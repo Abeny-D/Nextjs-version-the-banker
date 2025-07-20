@@ -4,7 +4,6 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import MenuIcon from '@mui/icons-material/Menu';
 import {useRouter} from "next/navigation";
 
-
 export default function Home() {
     const router = useRouter();
 
@@ -14,7 +13,7 @@ export default function Home() {
 
     return (
 
-        <div className="w-full h-full">
+        <section className="w-full h-full">
             <div className='flex justify-between w-full fixed top-0 p-5 text-white'>
                 <MenuIcon className="hover:text-yellow-200" to="/"/>
                 <VolumeUpIcon className="hover:text-yellow-200"/>
@@ -24,6 +23,6 @@ export default function Home() {
             </div>
 
 
-        </div>
+        </section>
     );
 }
