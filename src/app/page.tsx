@@ -8,7 +8,7 @@ export default function Home() {
     const router = useRouter();
 
     function routerAdd() {
-        router.push('/game-play-screen')
+        router.push('/game-screen')
     }
 
     return (

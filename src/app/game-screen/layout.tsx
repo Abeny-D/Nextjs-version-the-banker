@@ -17,14 +17,14 @@ export default function RootLayout({children,}: Readonly<{
     console.log('image data : ', GamePlayScreenBg)
 
     return (
-        <div className='w-screen h-screen bg-center bg-no-repeat bg-fixed bg-cover'
+        <section className='w-screen h-screen bg-center bg-no-repeat bg-fixed bg-cover'
 
              style={{
                  backgroundImage: `url(${GamePlayScreenBg.src})`,
              }}
         >
             {children}
-        </div>
+        </section>
 
     );
 }

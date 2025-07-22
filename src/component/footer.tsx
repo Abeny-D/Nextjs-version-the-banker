@@ -4,9 +4,9 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import XIcon from '@mui/icons-material/X';
 
-const Footer = () => {
+export const Footer = () => {
     return (
-        <div>
+        <footer>
             <div className="flex justify-center items-center w-screen p-4 gap-10 absolute bottom-0 left-0 ">
 
                 <a href="https://facebook.com" target="_blank"><FacebookIcon className="text-white hover:text-yellow-200 "/></a>
@@ -15,8 +15,6 @@ const Footer = () => {
             <a href="https://www.instagram.com/" target="_blank"><InstagramIcon className="text-white hover:text-yellow-200 "/></a>
 
             </div>
-        </div>
+        </footer>
     );
 };
-
-export default Footer;

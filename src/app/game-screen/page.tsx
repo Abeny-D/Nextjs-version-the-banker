@@ -7,15 +7,13 @@ import DeckContainer from "@/component/deck-container";
 import {motion} from "motion/react";
 
 
-function GameFlow() {
+export default function GameFlow() {
 
     const [players, setPlayers] = useState<{
         id: number;
         name: string;
         hand: (string | undefined)[];
-        bet: number;
-    }[]>
-    ([]);
+        bet: number; }[]>([]);
 
     const [randomCard, setRandomCard] = useState<null | string>(null);
     const [wonLossStatus, setWonLossStatus] = useState("Waiting for status");
@@ -50,8 +48,20 @@ function GameFlow() {
 
         while (playerNameInput.length < 4 && playerBetInput.length < 4) {
             const newPlayerName = prompt(`Please enter player ${playerNameInput.length + 1} name`)
+            if (newPlayerName === null) {
+                break;
+            }
 
-            const input = prompt(`Please enter player ${playerBetInput.length + 1} bet amount`);
+            if (!newPlayerName?.trim()) {
+                alert("Please enter player name");
+                continue;
+            }
+            const input = prompt(`Please enter player ${playerBetInput.length + 1} bet amount`, "500");
+
+            if (!input?.trim() || Number(input) === 0) {
+                alert("Please bet amount");
+                continue;
+            }
             const newPlayerBet: number | null = input !== null ? Number(input) : null;
 
 
@@ -60,12 +70,11 @@ function GameFlow() {
                 continue;
 
             }
-
-            if (newPlayerName === null || newPlayerBet === null) {
+            if (newPlayerBet === null) {
                 break;
             }
-
-            if (!newPlayerName?.trim()) {
+            if (newPlayerBet <= 0) {
+                alert("Please enter a positive number");
                 continue;
             }
 
@@ -289,7 +298,7 @@ function GameFlow() {
                             <div className="absolute top-2.5 left-3.5 rotate-25 "><DeckContainer
                                 hand={player.hand[1] ?? ""}></DeckContainer></div>
                         </div>
-                        <h3 className="text-center pt-4">👤 {player.name}</h3>
+                        <h3 className="text-center pt-4">Player: {player.name}</h3>
                         <p className="text-center"> Coins: {player.bet}</p>
                     </div>
                 ))}
@@ -326,4 +335,3 @@ function GameFlow() {
     );
 }
 
-export default GameFlow;
