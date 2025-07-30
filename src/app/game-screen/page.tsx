@@ -245,7 +245,6 @@ export default function GameFlow() {
     }
 
     function passTurn() {
-        if (players.length === 0) return;
         setWonLossStatus(`${players[currentPlayerIndex].name} passed their turn.`);
         nextTurn();
         setRandomCard(null);
@@ -255,7 +254,7 @@ export default function GameFlow() {
 
         return (<div className="flex justify-center items-center w-full h-full text-center ">
             <button onClick={handleStartGame}
-                    className="border-1 p-3 rounded-2xl hover:text-yellow-200 text-white">Add players
+                    className="btn btn-neutral rounded-2xl hover:text-yellow-200">Add players
             </button>
         </div>)
     }
