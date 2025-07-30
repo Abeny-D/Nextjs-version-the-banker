@@ -177,7 +177,7 @@ export default function GameFlow() {
             tempBankAmount -= 0;
         }
 
-// 🔄 Draw a card safely
+//  Draw a card safely
         const deck: string[] = shuffleDeck(createDeck());
         const card: string | undefined = deck.pop();
 
@@ -185,7 +185,7 @@ export default function GameFlow() {
             setRandomCard(card);
         }
 
-// 💥 GUARD AGAINST undefined BEFORE accessing card values
+//  GUARD AGAINST undefined BEFORE accessing card values
         const [card1, card2] = currentPlayer.hand ?? [];
 
         if (card && card1 && card2) {
@@ -310,6 +310,10 @@ export default function GameFlow() {
                 <button onClick={shufflePlayersCards} disabled={players.length === 0} className="border-1 p-3 rounded-2xl hover:text-white">
                     Shuffle Cards
                 </button>
+
+                <button onClick={bet} className="border-1 p-5 rounded-full hover:text-white bg-red-500">
+                    Bet
+                </button>
                 <label className="border-1 p-3 rounded-2xl hover:text-white">
                     Enter Bet Amount:
                     <input
@@ -322,9 +326,6 @@ export default function GameFlow() {
                         className="text-center"
                     />
                 </label>
-                <button onClick={bet} className="border-1 p-5 rounded-full hover:text-white bg-red-500">
-                    Bet
-                </button>
                 <button onClick={passTurn} className="border-1 p-5 rounded-full hover:text-white bg-amber-200 text-red-500">
                     Pass
                 </button>
